@@ -1,15 +1,13 @@
 % varibale setup
 
 % ray variables
-d_1 = 0.2; % travel distance before focal length
-d_2 = 1; % after focal length
-d = d_1 + d_2; % total distance
-
-M_1 = [1 d_1 0 0; 
+d = 0.1; % travel distance before focal length
+d_2 = -0.3; % after focal length
+d = d_1 + d_2;
+M_1 = [1 d 0 0; 
      0 1 0 0; 
-     0 0 1 d_1; 
+     0 0 1 d; 
      0 0 0 1]; % transformation matrix 
-
 x_angles = linspace(-pi/20, pi/20, 8);
 
 % Lense variables
@@ -20,11 +18,10 @@ M_f = [1 0 0 0;
     -1/f 1 0 0;
        0 0 1 0;
        0 0 -1/f 1];
-
-M_2 = [1 d_2 0 0; 
+M_2 = [1 d 0 0; 
        0 1 0 0; 
-       0 0 1 d_2; 
-       0 0 0 1];
+       0 0 1 d; 
+       0 0 0 1];;
 
 % 1st ray
 hold on;
@@ -33,10 +30,8 @@ for i = 1:length(x_angles)
     final_pos = M_1 * initial_pos;
     % p_1 = (initial z = 0, initial x = 0)
     % p_2 = (final z = 0.2, final x = final_pos(1))
-    final_pos_2 = M_f * final_pos;
-    final_pos_3 = M_2 * final_pos_2;
-    z_pos = [0 d_1 d];
-    x_pos = [0 final_pos(1) final_pos_3(1)];
+    z_pos = [0 d];
+    x_pos = [0 final_pos(1)];
 
    plot(z_pos, x_pos, 'b');
 end
@@ -47,13 +42,10 @@ for i = 1:length(x_angles)
     final_pos = M_1 * initial_pos;
     % p_1 = (initial z = 0, initial x = 0)
     % p_2 = (final z = 0.2, final x = final_pos(1))
-    final_pos_2 = M_f * final_pos;
-    final_pos_3 = M_2 * final_pos_2;
-    z_pos = [0 d_1 d];
-    x_pos = [0.01 final_pos(1) final_pos_3(1)];
+    z_pos = [0 d];
+    x_pos = [0.01 final_pos(1)];
 
    plot(z_pos, x_pos, 'r');
 end
 title("rays");
-xlim([0 1]);
 hold off;
