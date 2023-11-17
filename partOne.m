@@ -28,7 +28,38 @@ M_2 = [1 d_2 0 0;
        0 0 1 d_2; 
        0 0 0 1];
 
+%% In Free Space
+
 % 1st ray
+figure();
+hold on;
+for i = 1:length(x_angles)
+    initial_pos = [0 x_angles(i) 0 0]';
+    final_pos = M_1 * initial_pos;
+    z_pos = [0 d_1];
+    x_pos = [0 final_pos(1)];
+    plot(z_pos, x_pos, 'b'); 
+end
+
+% 2nd ray
+for i = 1:length(x_angles)
+    initial_pos = [0.01 x_angles(i) 0 0]';
+    final_pos = M_1 * initial_pos;
+    z_pos = [0 d_1];
+    x_pos = [0.01 final_pos(1)];
+
+    plot(z_pos, x_pos, 'r');
+end
+
+title("Ray Propagation In Free Space");
+xlabel("Z(m)");
+ylabel("X(m)");
+hold off;
+
+%% Adding Lense
+
+% 1st ray
+figure();
 hold on;
 for i = 1:length(x_angles)
     initial_pos = [0 x_angles(i) 0 0]';
