@@ -74,6 +74,8 @@ x_values = [0.2, 0.2];
 y_values = [-0.02, 0.02];
 plot(x_values, y_values, 'black');
 
-title("rays");
+title("Ray Propagation With Lense");
 xlim([0 1]);
+xlabel("Z(m)");
+ylabel("X(m)");
 hold off;
