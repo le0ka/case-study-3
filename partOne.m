@@ -1,3 +1,5 @@
+%% This is the correct and finished part 1!!!!
+
 % varibale setup
 
 % ray variables
@@ -31,29 +33,47 @@ hold on;
 for i = 1:length(x_angles)
     initial_pos = [0 x_angles(i) 0 0]';
     final_pos = M_1 * initial_pos;
-    % p_1 = (initial z = 0, initial x = 0)
-    % p_2 = (final z = 0.2, final x = final_pos(1))
     final_pos_2 = M_f * final_pos;
-    final_pos_3 = M_2 * final_pos_2;
-    z_pos = [0 d_1 d];
-    x_pos = [0 final_pos(1) final_pos_3(1)];
+    if (abs(final_pos_2(1)) <= 0.02)
+        final_pos_3 = M_2 * final_pos_2;
+        z_pos = [0 d_1 d];
+        x_pos = [0 final_pos(1) final_pos_3(1)];
 
-   plot(z_pos, x_pos, 'b');
+        plot(z_pos, x_pos, 'b');
+    else
+        z_pos = [0 d_1];
+        x_pos = [0 final_pos(1)];
+
+        plot(z_pos, x_pos, 'b');
+
+    end
+    
 end
 
 % 2nd ray
 for i = 1:length(x_angles)
     initial_pos = [0.01 x_angles(i) 0 0]';
     final_pos = M_1 * initial_pos;
-    % p_1 = (initial z = 0, initial x = 0)
-    % p_2 = (final z = 0.2, final x = final_pos(1))
     final_pos_2 = M_f * final_pos;
-    final_pos_3 = M_2 * final_pos_2;
-    z_pos = [0 d_1 d];
-    x_pos = [0.01 final_pos(1) final_pos_3(1)];
+    if(abs(final_pos_2(1)) <= 0.02)
+        final_pos_3 = M_2 * final_pos_2;
+        z_pos = [0 d_1 d];
+        x_pos = [0.01 final_pos(1) final_pos_3(1)];
 
-   plot(z_pos, x_pos, 'r');
+        plot(z_pos, x_pos, 'r');
+    else
+        z_pos = [0 d_1];
+        x_pos = [0.01 final_pos(1)];
+
+        plot(z_pos, x_pos, 'r');
+    end
 end
+
+% show lense on plot
+x_values = [0.2, 0.2];
+y_values = [-0.02, 0.02];
+plot(x_values, y_values, 'black');
+
 title("rays");
 xlim([0 1]);
 hold off;
